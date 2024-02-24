@@ -2,7 +2,8 @@ import * as THREE from "three";
 import "./style.css";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import gsap from "gsap";
-
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
+import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 const scene = new THREE.Scene();
 
 const geometry = new THREE.SphereGeometry(3, 64, 64);
@@ -38,6 +39,53 @@ const renderer = new THREE.WebGLRenderer({ canvas });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(2);
 renderer.render(scene, camera);
+
+const fontLoader = new FontLoader();
+let font;
+
+fontLoader.load('./Space Frigate_Regular.json', loadedFont => {
+  font = loadedFont;
+  console.log("Font loaded:", font);
+
+  // text geometry for the title
+  const titleTextGeometry = new TextGeometry("", {
+    font: font,
+    size: 10,
+    height: 0.1,
+  });
+
+  const titleTextMaterial = new THREE.MeshStandardMaterial({ color: "#ffffff" });
+
+  const titleTextMesh = new THREE.Mesh(titleTextGeometry, titleTextMaterial);
+  titleTextMesh.position.set(0, 10, 10);
+  titleTextMesh.lookAt(camera.position);
+  scene.add(titleTextMesh);
+
+  // text elements for qualities
+  const qualities = ["Understanding", "Positive Attitude", "Helpful", "Supportive"];
+  const qualityTexts = [];
+
+  for (let i = 0; i < qualities.length; i++) {
+    const angle = (i / qualities.length) * Math.PI * 2;
+    const x = Math.sin(angle) * 10;
+    const z = Math.cos(angle) * 10;
+
+    const qualityTextGeometry = new TextGeometry(qualities[i], {
+      font: font,
+      size: 0.5,
+      height: 0.1,
+    });
+
+    const qualityTextMaterial = new THREE.MeshStandardMaterial({ color: "#ffffff" });
+
+    const qualityTextMesh = new THREE.Mesh(qualityTextGeometry, qualityTextMaterial);
+    qualityTextMesh.position.set(x, 0, z);
+    qualityTextMesh.lookAt(camera.position);
+    scene.add(qualityTextMesh);
+
+    qualityTexts.push(qualityTextMesh);
+  }
+});
 
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
@@ -91,3 +139,4 @@ window.addEventListener("mousemove", (e) => {
     });
   }
 });
+renderer.render(scene, camera);
