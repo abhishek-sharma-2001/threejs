@@ -6,4 +6,23 @@
 
 body,html{
   overflow: hidden;
+  font-family: "Poppins", sans-serif;
+}
+
+.webgl{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.title{
+  position: absolute;
+  font-size: 2rem;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+  z-index: 2;
+  text-align: center;
+  color: #fff;
 }
