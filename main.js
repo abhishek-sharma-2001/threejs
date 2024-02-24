@@ -43,7 +43,7 @@ renderer.render(scene, camera);
 const fontLoader = new FontLoader();
 let font;
 
-fontLoader.load('./Space Frigate_Regular.json', loadedFont => {
+fontLoader.load('Space Frigate_Regular.json', loadedFont => {
   font = loadedFont;
   console.log("Font loaded:", font);
 
