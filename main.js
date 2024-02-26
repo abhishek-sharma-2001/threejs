@@ -42,8 +42,7 @@ renderer.render(scene, camera);
 
 const fontLoader = new FontLoader();
 let font;
-
-fontLoader.load('SpaceFrigate_Regular.json', loadedFont => {
+fontLoader.load('./SpaceFrigate_Regular.json', loadedFont => {
   font = loadedFont;
   console.log("Font loaded:", font);
 
