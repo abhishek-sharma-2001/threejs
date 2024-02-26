@@ -42,7 +42,7 @@ renderer.render(scene, camera);
 
 const fontLoader = new FontLoader();
 let font;
-fontLoader.load('./font.json', loadedFont => {
+fontLoader.load('./asset/font.json', loadedFont => {
   font = loadedFont;
   console.log("Font loaded:", font);
 
